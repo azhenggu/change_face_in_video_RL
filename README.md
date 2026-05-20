@@ -78,6 +78,6 @@
 
 ## 输出
 
-- 换脸后视频：`saveVideo.mp4`（默认）
+- 换脸后视频：`saveVideo.mp4`-只展示效果，不做商用，测试视频侵权立刻删（狗头保命）
 - <img width="1422" height="1214" alt="image" src="https://github.com/user-attachments/assets/12702fe6-4098-4271-bf2b-fa0305360b3b" />
 
