@@ -1,4 +1,4 @@
-# AI-Change-face-in-the-video
+# change_face_in_video_RL
 
 ## 深度学习换脸（推荐）
 
@@ -30,6 +30,3 @@ python main.py
 - 有 NVIDIA 显卡时可在 `config.py` 设 `DEVICE = "cuda"` 显著加速
 
 ---
-
-
-
