@@ -2,7 +2,7 @@
 
 ## 深度学习换脸（推荐）
 
-使用 **InsightFace inswapper**（与 roop / FaceFusion 同类）+ **GFPGAN / CodeFormer** 人脸修复，效果远好于下方 dlib 68 点方案。
+使用 **InsightFace inswapper**（与 roop / FaceFusion 同类）+ **GFPGAN / CodeFormer** 人脸修复。
 
 ### 快速开始
 
