@@ -1,0 +1,20 @@
+# 深度学习换脸依赖
+opencv-python>=4.8.0
+numpy>=1.24.0
+Pillow>=10.0.0
+tqdm>=4.65.0
+onnxruntime>=1.16.0
+torch>=2.0.0
+torchvision>=0.15.0
+
+# InsightFace（Windows Python 3.13 请用预编译 wheel，见 README）
+# pip install https://huggingface.co/ussoewwin/Insightface_for_windows/resolve/main/insightface-0.7.3-cp313-cp313-win_amd64.whl
+insightface>=0.7.3
+
+# 人脸修复辅助
+facexlib>=0.3.0
+lpips>=0.1.4
+lmdb>=1.4.0
+yapf>=0.40.0
+
+# vendor/ 目录需包含 BasicSR、GFPGAN、CodeFormer（clone 后见 README）

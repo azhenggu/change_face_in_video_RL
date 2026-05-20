@@ -1,0 +1,8 @@
+origin/
+transfer/
+models/
+__pycache__/
+*.pyc
+gfpgan/weights/
+saveVideo.mp4
+saveVideo.avi

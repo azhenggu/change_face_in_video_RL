@@ -1,22 +1,55 @@
 import os
 import cv2
-from PIL import Image  
-def size(transferpath):#获取图片像素的大小
-    filelist = os.listdir(transferpath)
-    
-    img = Image.open(transferpath + filelist[0])  
-    return  img.size
-def mergevideo(transferpath):
-    img_root = transferpath #这里写你的文件夹路径，比如：/home/youname/data/img/,注意最后一个文件夹要有斜杠
-    fps = 24    #保存视频的FPS，可以适当调整
-    filelist = os.listdir(transferpath)  #得到所有帧的文件名，在循环中使用到文件数目
+from PIL import Image
 
-    #可以用(*'DVIX')或(*'X264'),如果都不行先装ffmepg
-    fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-    s=size(transferpath) #获取图片像素的大小
-    videoWriter = cv2.VideoWriter('saveVideo.avi',fourcc,fps,s)#最后一个是保存图片的尺寸
 
-    for i in range(len(filelist)):
-        frame = cv2.imread(img_root+str(i+1)+'.jpg')
-        videoWriter.write(frame)
-    videoWriter.release()
+def _frame_sort_key(name: str) -> int:
+    return int(os.path.splitext(name)[0])
+
+
+def _list_frame_files(folder: str, ext: str) -> list[str]:
+    """只保留数字命名的帧文件，如 0.jpg、1.jpg。"""
+    ext = ext.lower()
+    files = []
+    for name in os.listdir(folder):
+        if not name.lower().endswith(ext):
+            continue
+        stem = os.path.splitext(name)[0]
+        if stem.isdigit():
+            files.append(name)
+    return sorted(files, key=_frame_sort_key)
+
+
+def get_video_size(transferpath: str, ext: str = ".jpg") -> tuple[int, int]:
+    files = _list_frame_files(transferpath, ext)
+    if not files:
+        raise FileNotFoundError(f"目录 {transferpath} 中没有 {ext} 帧图")
+    img = Image.open(os.path.join(transferpath, files[0]))
+    return img.size
+
+
+def mergevideo(
+    transferpath: str,
+    output_path: str = "saveVideo.mp4",
+    fps: float = 25,
+    ext: str = ".jpg",
+) -> None:
+    """将 transfer 目录中的帧合成为视频（帧名从 0 开始：0.jpg, 1.jpg, ...）。"""
+    img_root = transferpath
+    files = _list_frame_files(transferpath, ext)
+    if not files:
+        raise FileNotFoundError(f"未找到帧图: {transferpath}")
+
+    size = get_video_size(transferpath, ext)
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    writer = cv2.VideoWriter(output_path, fourcc, fps, size)
+
+    for name in files:
+        frame = cv2.imread(os.path.join(img_root, name))
+        if frame is None:
+            continue
+        if (frame.shape[1], frame.shape[0]) != size:
+            frame = cv2.resize(frame, size)
+        writer.write(frame)
+
+    writer.release()
