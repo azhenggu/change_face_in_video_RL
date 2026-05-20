@@ -79,3 +79,5 @@
 ## 输出
 
 - 换脸后视频：`saveVideo.mp4`（默认）
+- <img width="1422" height="1214" alt="image" src="https://github.com/user-attachments/assets/12702fe6-4098-4271-bf2b-fa0305360b3b" />
+
