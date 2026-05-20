@@ -3,7 +3,7 @@ import os
 
 # 路径（相对项目根目录）
 SOURCE_FACE = "1.png"           # 源人脸图片
-VIDEO_INPUT = "trump.mp4"       # 输入视频
+VIDEO_INPUT = "video.mp4"       # 输入视频
 OUTPUT_VIDEO = "saveVideo.mp4" # 输出视频
 
 ORIGIN_DIR = "origin/"
